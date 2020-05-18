@@ -1,0 +1,36 @@
+<configuration>
+    # Console appender
+    <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            # Pattern of log message for console appender
+            <Pattern>%black(%d{ISO8601}) %highlight(%-5level) <!--[%blue(%t)]--> %yellow(%C{1.}): %msg%n%throwable</Pattern>
+            # %black(%d{yyyy-MM-dd HH:mm:ss}) %highlight(%-5p) %m%n
+            # %black(%d{ISO8601}) %highlight(%-5level) [%blue(%t)] %yellow(%C{1.}): %msg%n%throwable
+        </layout>
+    </appender>
+
+    # File appender
+    <appender name="File" class="ch.qos.logback.core.FileAppender">
+        <file>errors.log</file>
+        <append>false</append>
+        <encoder>
+            # Pattern of log message for file appender
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} %-5p %-80C{1.} %m%n</pattern>
+            # %d{yyyy-MM-dd HH:mm:ss} %-5p %m%n
+            # %d %p %C{1.} [%t] %m%n
+        </encoder>
+    </appender>
+
+    # Override log level for specified package
+
+    <logger name="com.mokhovav" level="DEBUG" additivity="false">
+        <appender-ref ref="Console" />
+        <appender-ref ref="File" />
+    </logger> <!--TRACE  DEBUG  INFO WARN ERROR  -->
+
+    <root level="INFO">
+        <appender-ref ref="Console" />
+        <appender-ref ref="File" />
+    </root>
+
+</configuration>
