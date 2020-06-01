@@ -6,12 +6,10 @@ import javax.persistence.MappedSuperclass;
 public class NamedEntity extends BaseEntity{
     private String name;
 
-    @Override
     public String getName() {
         return name;
     }
 
-    @Override
     public void setName(String name) {
         this.name = name;
     }
