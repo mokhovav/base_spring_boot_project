@@ -1,4 +1,4 @@
-<#macro pageHead title>
+<#macro head title>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,7 +8,7 @@
 </head>
 </#macro>
 
-<#macro pageBody>
+<#macro body>
     <body>
     <#nested>
     </body>

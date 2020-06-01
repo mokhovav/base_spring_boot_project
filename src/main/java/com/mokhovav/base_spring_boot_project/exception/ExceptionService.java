@@ -34,7 +34,7 @@ public class ExceptionService {
     public ModelAndView getModelAndView(Exception exception) {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("errors/error");
-        modelAndView.addObject("errorMessage", exception.getMessage());
+        modelAndView.addObject("error", exception.getMessage());
         return modelAndView;
     }
 

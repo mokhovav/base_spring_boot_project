@@ -4,7 +4,7 @@ import com.mokhovav.base_spring_boot_project.annotations.Tracking;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-@SpringBootApplication
+@SpringBootApplication(scanBasePackages = {"com.mokhovav.base_spring_boot_project"})
 public class BaseSpringBootProject {
     @Tracking
     public static void main(String[] args) {

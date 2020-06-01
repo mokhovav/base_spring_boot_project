@@ -1,18 +1,23 @@
 package com.mokhovav.base_spring_boot_project.baseClasses;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.springframework.context.annotation.Lazy;
-import org.springframework.stereotype.Component;
+import javax.persistence.*;
 
-@Component
-@Lazy
+@MappedSuperclass
 public class BaseEntity {
     @JsonIgnore
-    protected Long id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
     protected String name;
 
     public Long getId() {
         return id;
+    }
+
+    public boolean isNew() {
+        return this.id == null;
     }
 
     public void setId(Long id) {
