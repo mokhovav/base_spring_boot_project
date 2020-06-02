@@ -1,4 +1,4 @@
-package com.mokhovav.base_spring_boot_project.exception;
+package com.mokhovav.base_spring_boot_project.exceptions;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,4 +1,4 @@
-package com.mokhovav.base_spring_boot_project.exception;
+package com.mokhovav.base_spring_boot_project.exceptions;
 
 import com.mokhovav.base_spring_boot_project.BaseSpringBootProject;
 import org.junit.Test;
