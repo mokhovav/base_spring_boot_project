@@ -24,6 +24,12 @@ public class WebExceptionController {
         return;
     }
 
+    @ExceptionHandler(CommunicationException.class)
+    private void communicationException(HttpServletRequest req, CommunicationException exception){
+        logger.debug(String.format("%-16s","COMMUNICATION ERROR:")+exception.getMessage());
+        return;
+    }
+
     @ExceptionHandler(LogicalException.class)
     private void logicalException(HttpServletRequest req, LogicalException exception){
         logger.debug(String.format("%-16s","LOGICAL ERROR:")+exception.getMessage());

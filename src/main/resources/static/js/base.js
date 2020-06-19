@@ -26,8 +26,41 @@ Base = function () {
         return JSON.parse(text);
     }
     /*****************************************************************************/
+    /*****************************************************************************/
+    const Socket = function (uil, onopen, onmessage, onerror, onclose) {
+        this.uil = uil;
+        this.onopen = onopen;
+        this.onmessage = onmessage;
+        this.onerror = onerror;
+        this.onclose = onclose;
+        this.socket = null;
+    }
+
+    Socket.prototype.connect = function () {
+        if (this.socket != null) return false;
+        this.socket = new SockJS(this.uil);
+        this.socket.onopen = this.onopen;
+        this.socket.onmessage = this.onmessage;
+        this.socket.onerror = this.onerror;
+        this.socket.onclose = this.onclose;
+        return true;
+    }
+
+    Socket.prototype.disconnect = function () {
+        this.socket.close();
+        this.socket = null;
+    }
+
+    Socket.prototype.send = function (message) {
+        if (this.socket == null) return false;
+        this.socket.send(message);
+        return true;
+    }
+    /*****************************************************************************/
+
     return {
         sendPostRequest,
-        convertDataToObject
+        convertDataToObject,
+        Socket
     }
 }();

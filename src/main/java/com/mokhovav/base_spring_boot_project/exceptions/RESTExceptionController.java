@@ -26,6 +26,12 @@ public class RESTExceptionController {
         return exceptionService.getRESTMessage(exception, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
+    @ExceptionHandler(CommunicationException.class)
+    private ResponseEntity<ErrorResponse> communicationException(Exception exception, HttpServletRequest request){
+        logger.debug(String.format("%-16s","COMMUNICATION ERROR:") + exception.getMessage());
+        return exceptionService.getRESTMessage(exception, HttpStatus.SERVICE_UNAVAILABLE);
+    }
+
     @ExceptionHandler(LogicalException.class)
     private ResponseEntity<ErrorResponse> logicalException(Exception exception, HttpServletRequest request){
         logger.debug(String.format("%-16s","LOGICAL ERROR:") + exception.getMessage());
