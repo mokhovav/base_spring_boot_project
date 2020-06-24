@@ -6,7 +6,6 @@
     <title>${title}</title>
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="webjars/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link href="/css/base.css" rel="stylesheet">
     <#nested>
 </head>
 </#macro>

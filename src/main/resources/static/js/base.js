@@ -1,7 +1,8 @@
 Base = function () {
     /*****************************************************************************/
     // Functions for sending and receiving messages using the POST method
-    function sendPostRequest(context, address = "/", message, func) {
+
+    function sendRequest(method, address = "/", message){
         let xmlHttp;
         if (window.XMLHttpRequest) {
             // code for modern browsers
@@ -10,13 +11,30 @@ Base = function () {
             // code for old IE browsers
             xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
         }
-        xmlHttp.open("POST", address + "/" + JSON.stringify(message), true);
+        if (message == null || typeof (message) == undefined)
+            xmlHttp.open(method, address, true);
+        else
+            xmlHttp.open(method, address + "/" + message, true);
         let csrf_token = document.getElementById("csrf_token");
         if (csrf_token != null) xmlHttp.setRequestHeader("X-XSRF-TOKEN", csrf_token.getAttribute("value"));
         xmlHttp.send();
+        return xmlHttp;
+    }
+
+    function sendPostRequestContext (context, address = "/", message, func) {
+        let xmlHttp = sendRequest('POST',address, message);
         xmlHttp.onreadystatechange = function () {
             if (this.readyState == 4 && this.status == 200) {
                 func(context, this.responseText);
+            }
+        }
+    }
+
+    function sendPostRequest(address = "/", message, func) {
+        let xmlHttp = sendRequest('POST',address, message);
+        xmlHttp.onreadystatechange = function () {
+            if (this.readyState == 4 && this.status == 200) {
+                func(this.responseText);
             }
         }
     }
@@ -24,6 +42,11 @@ Base = function () {
     /*****************************************************************************/
     function convertDataToObject (text) {
         return JSON.parse(text);
+    }
+    /*****************************************************************************/
+    /*****************************************************************************/
+    function convertObjectToString (text) {
+        return JSON.stringify(text);
     }
     /*****************************************************************************/
     /*****************************************************************************/
@@ -60,7 +83,9 @@ Base = function () {
 
     return {
         sendPostRequest,
+        sendPostRequestContext,
         convertDataToObject,
+        convertObjectToString,
         Socket
     }
 }();
